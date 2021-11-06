@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import com.example.reto1.databinding.FragmentPerfilBinding
+import com.example.reto1.databinding.FragmentVistaPerfilBinding
 
 
 /**
@@ -16,14 +18,15 @@ import com.example.reto1.databinding.FragmentPerfilBinding
  */
 class VistaPerfil : Fragment() {
 
-    private  var _binding: FragmentPerfilBinding? = null
+    private  var _binding: FragmentVistaPerfilBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var perfil: Perfil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
 
-        }
+        perfil = Perfil.newInstance()
     }
 
     override fun onCreateView(
@@ -33,8 +36,17 @@ class VistaPerfil : Fragment() {
         Log.e(">>>","onCreateView")
         // Inflate the layout for this fragment
 
-        _binding = FragmentPerfilBinding.inflate(inflater, container, false)
+        _binding = FragmentVistaPerfilBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.editarBtn.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainer, perfil)
+            transaction.addToBackStack("vistaPerfil")
+            transaction.commit()
+
+        }
+
 
         return view
     }
@@ -59,4 +71,6 @@ class VistaPerfil : Fragment() {
         fun newInstance() = VistaPerfil()
 
     }
+
+
 }
