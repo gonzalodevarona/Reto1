@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var perfil: Perfil
     private lateinit var listaEventos: ListaEventos
 
+    private lateinit var vistaPerfil: VistaPerfil
+
     private lateinit var binding : ActivityMainBinding
 
 
@@ -27,23 +29,25 @@ class MainActivity : AppCompatActivity() {
         perfil = Perfil.newInstance()
         listaEventos = ListaEventos.newInstance()
 
+        vistaPerfil = VistaPerfil.newInstance()
+
         //Suscripcion
         perfil.listener = listaEventos
 
 
 
-        showFragment(perfil)
+        showFragment(vistaPerfil)
 
         binding.navigator.setOnItemSelectedListener { menuItem ->
             if (menuItem.itemId == R.id.perfil){
-                showFragment(perfil)
+                showFragment(vistaPerfil)
             } else if (menuItem.itemId == R.id.publicaciones){
                 showFragment(listaEventos)
             } else if (menuItem.itemId == R.id.mapa){
                 showFragment(listaEventos)
                 //CHANGE THIS TO MAP TODO
             } else{
-                showFragment(perfil)
+                showFragment(vistaPerfil)
             }
             true
 
