@@ -1,18 +1,16 @@
-package com.example.reto1
+package com.example.reto1.view
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.reto1.Perfil.OnNewEventoListener
+import com.example.reto1.util.EventoAdapter
 import com.example.reto1.databinding.FragmentListaEventosBinding
+import com.example.reto1.model.Evento
+import com.example.reto1.model.Perfil
 import java.util.*
 
 

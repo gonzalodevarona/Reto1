@@ -1,8 +1,6 @@
-package com.example.reto1
+package com.example.reto1.model
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.app.Instrumentation
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.fragment.app.FragmentManager
-import com.example.reto1.databinding.FragmentListaEventosBinding
+import com.example.reto1.view.MainActivity
 import com.example.reto1.databinding.FragmentPerfilBinding
-import java.io.File
 import androidx.activity.result.ActivityResult as ActivityResult
 
 

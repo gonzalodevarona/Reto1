@@ -1,4 +1,4 @@
-package com.example.reto1
+package com.example.reto1.util
 
 import android.annotation.SuppressLint
 import android.content.ContentUris

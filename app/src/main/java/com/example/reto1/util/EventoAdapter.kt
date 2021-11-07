@@ -1,8 +1,10 @@
-package com.example.reto1
+package com.example.reto1.util
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.reto1.R
+import com.example.reto1.model.Evento
 
 class EventoAdapter : RecyclerView.Adapter<EventoViewHolder>() {
 

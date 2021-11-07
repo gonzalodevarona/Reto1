@@ -1,4 +1,4 @@
-package com.example.reto1
+package com.example.reto1.view
 
 import android.os.Bundle
 import android.util.Log
@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
-import com.example.reto1.databinding.FragmentPerfilBinding
+import com.example.reto1.R
 import com.example.reto1.databinding.FragmentVistaPerfilBinding
+import com.example.reto1.model.Perfil
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**

@@ -1,11 +1,12 @@
-package com.example.reto1
+package com.example.reto1.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.reto1.R
 import com.example.reto1.databinding.ActivityMainBinding
-import java.util.jar.Manifest
+import com.example.reto1.model.Perfil
+import com.example.reto1.model.Restaurante
 
 class MainActivity : AppCompatActivity() {
 
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         return restaurantes.size
     }
 
-    fun getRestauranteByIndex(pos : Int):Restaurante{
+    fun getRestauranteByIndex(pos : Int): Restaurante {
         return restaurantes[pos]
     }
 

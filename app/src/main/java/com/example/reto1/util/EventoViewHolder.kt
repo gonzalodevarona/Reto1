@@ -1,8 +1,9 @@
-package com.example.reto1
+package com.example.reto1.util
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.reto1.R
 
 class EventoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
