@@ -12,8 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.fragment.app.FragmentManager
 import com.example.reto1.databinding.FragmentListaEventosBinding
 import com.example.reto1.databinding.FragmentPerfilBinding
+import java.io.File
 import androidx.activity.result.ActivityResult as ActivityResult
 
 
@@ -66,6 +68,7 @@ class Perfil : Fragment() {
                 val activity: MainActivity = context as MainActivity
                 val restaurante =  Restaurante(binding.nameRestaurant.text.toString(), binding.descriptionRestaurant.text.toString(), binding.descriptionRestaurant.text.toString())
                 activity.addRestaurante(restaurante)
+                val transaction = requireActivity().supportFragmentManager.popBackStack()
 
 
 
@@ -85,9 +88,15 @@ class Perfil : Fragment() {
 
     fun onGalleryResult(result: ActivityResult){
         if (result.resultCode == RESULT_OK){
+
             val uriImage = result.data?.data
             uriImage?.let {
+
+
                 binding.galleryBtn.setImageURI(uriImage)
+
+
+
             }
         }
     }
