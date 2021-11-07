@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/fragment_perfil.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_publicaciones_vacias.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_vista_perfil.xml" value="0.25" />
       </map>
     </option>

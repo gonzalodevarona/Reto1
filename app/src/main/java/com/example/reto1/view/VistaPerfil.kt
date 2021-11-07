@@ -22,6 +22,7 @@ class VistaPerfil : Fragment(){
     private  var _binding: FragmentVistaPerfilBinding? = null
     private val binding get() = _binding!!
 
+    //Siguiente fragment
     private lateinit var perfil: Perfil
 
 

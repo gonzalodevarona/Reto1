@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.reto1.R
 import com.example.reto1.databinding.ActivityMainBinding
+import com.example.reto1.model.Evento
 import com.example.reto1.model.Perfil
 import com.example.reto1.model.Restaurante
 
@@ -17,10 +18,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var vistaPerfil: VistaPerfil
 
+    private lateinit var publicacionesVacias: PublicacionesVacias
+
     private lateinit var binding : ActivityMainBinding
 
     //STATE
     private val restaurantes = ArrayList<Restaurante>()
+    private val eventos = ArrayList<Evento>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
         vistaPerfil = VistaPerfil.newInstance()
 
+        publicacionesVacias = PublicacionesVacias.newInstance()
+
         //Suscripcion
         perfil.listener = listaEventos
 
@@ -48,7 +54,13 @@ class MainActivity : AppCompatActivity() {
                 showFragment(vistaPerfil)
                 vistaPerfil.setPerfil(perfil)
             } else if (menuItem.itemId == R.id.publicaciones){
-                showFragment(listaEventos)
+                if (eventos.size == 0){
+                    showFragment(publicacionesVacias)
+                    publicacionesVacias.setListaEventos(listaEventos)
+                } else{
+                    showFragment(listaEventos)
+                }
+
             } else if (menuItem.itemId == R.id.mapa){
                 showFragment(listaEventos)
                 //CHANGE THIS TO MAP TODO
