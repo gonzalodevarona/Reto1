@@ -40,6 +40,19 @@ class Perfil : Fragment() {
         val galleryLauncher = registerForActivityResult(StartActivityForResult(), ::onGalleryResult)
 
 
+        //RECUPERAR EL ESTADO
+        val activity: MainActivity = context as MainActivity
+
+
+        if (activity.getSizeRestaurantes() > 0) {
+
+            var restaurante = activity.getRestauranteByIndex(activity.getSizeRestaurantes()-1)
+
+            binding.nameRestaurant.append(restaurante.nombre)
+            binding.descriptionRestaurant.append(restaurante.descripcion)
+        }
+
+        //Editar restaurante accion
         binding.addRestaurantBtn.setOnClickListener {
             val text = binding.nameRestaurant.text.toString()
 
