@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         //Suscripcion
         perfil.listener = listaEventos
-        perfil.listenerPerfil = vistaPerfil
+
 
 
         showFragment(vistaPerfil)

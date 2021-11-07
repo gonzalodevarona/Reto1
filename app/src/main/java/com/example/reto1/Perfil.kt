@@ -25,9 +25,6 @@ class Perfil : Fragment() {
     //Listener
     var listener : OnNewEventoListener? = null
 
-    var listenerPerfil : OnNewPerfilListener? = null
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +40,6 @@ class Perfil : Fragment() {
 
         binding.addRestaurantBtn.setOnClickListener {
             val text = binding.nameRestaurant.text.toString()
-            Toast.makeText(activity, text, Toast.LENGTH_LONG).show()
 
             //Publicacion
             listener?.let {
@@ -106,9 +102,6 @@ class Perfil : Fragment() {
         fun onNewEvento(evento : String){}
     }
 
-    interface OnNewPerfilListener{
-        fun onNewPerfil(perfil : Restaurante){}
-    }
 
 
     companion object {

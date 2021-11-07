@@ -18,7 +18,7 @@ import kotlin.collections.ArrayList
  * Use the [VistaPerfil.newInstance] factory method to
  * create an instance of this fragment.
  */
-class VistaPerfil : Fragment(), Perfil.OnNewPerfilListener {
+class VistaPerfil : Fragment(){
 
     private  var _binding: FragmentVistaPerfilBinding? = null
     private val binding get() = _binding!!
@@ -96,13 +96,5 @@ class VistaPerfil : Fragment(), Perfil.OnNewPerfilListener {
 
     }
 
-    //Metodo que se ejecuta desde Perfil
-    override fun onNewPerfil(perfil: Restaurante) {
-        //Modificar el estado
 
-
-
-    }
-
-
-}
+} //end of class
