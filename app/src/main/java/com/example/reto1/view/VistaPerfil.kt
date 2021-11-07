@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.reto1.R
 import com.example.reto1.databinding.FragmentVistaPerfilBinding
-import com.example.reto1.model.Perfil
+import com.example.reto1.util.GeneralBehavior
 import java.util.*
 
 
@@ -17,7 +17,7 @@ import java.util.*
  * Use the [VistaPerfil.newInstance] factory method to
  * create an instance of this fragment.
  */
-class VistaPerfil : Fragment(){
+class VistaPerfil : GeneralBehavior(){
 
     private  var _binding: FragmentVistaPerfilBinding? = null
     private val binding get() = _binding!!
@@ -49,7 +49,8 @@ class VistaPerfil : Fragment(){
 
         //RECUPERAR EL ESTADO
         val activity: MainActivity = context as MainActivity
-        Log.e(">>>>",activity.getSizeRestaurantes().toString())
+
+        super.emptyBackStack()
 
         if (activity.getSizeRestaurantes() > 0) {
             Log.e(">>>>","LLEGUEEEEEEEEE")
@@ -61,14 +62,8 @@ class VistaPerfil : Fragment(){
 
 
         binding.editarBtn.setOnClickListener {
-            Log.e(">>>", requireActivity().toString())
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainer, perfil)
-            transaction.addToBackStack("vistaPerfil")
-            transaction.commit()
-
+            super.changeFromFragmentAtoFragmentB(perfil)
         }
-
 
         return view
     }
@@ -76,7 +71,6 @@ class VistaPerfil : Fragment(){
 
 
     override fun onDestroyView() {
-        Log.e(">>>","onDestroyView")
         super.onDestroyView()
         _binding = null
     }

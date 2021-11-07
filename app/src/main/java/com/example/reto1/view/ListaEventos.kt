@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reto1.util.EventoAdapter
 import com.example.reto1.databinding.FragmentListaEventosBinding
 import com.example.reto1.model.Evento
-import com.example.reto1.model.Perfil
+import com.example.reto1.util.GeneralBehavior
 import java.util.*
 
 
-class ListaEventos : Fragment(), Perfil.OnNewEventoListener {
+class ListaEventos :   GeneralBehavior(), Perfil.OnNewEventoListener {
 
 
     private  var _binding:FragmentListaEventosBinding? = null
@@ -40,6 +40,13 @@ class ListaEventos : Fragment(), Perfil.OnNewEventoListener {
 
 
         //Recrear el estado
+        val fm = requireActivity().supportFragmentManager
+        var i = fm.backStackEntryCount
+        while (i<0){
+            fm.popBackStack()
+        }
+
+
         val eventoRecycler = binding.eventoRecycler
         eventoRecycler.setHasFixedSize(true)
         eventoRecycler.layoutManager = LinearLayoutManager(activity)
@@ -57,15 +64,7 @@ class ListaEventos : Fragment(), Perfil.OnNewEventoListener {
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListaEventos.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance() = ListaEventos()
 

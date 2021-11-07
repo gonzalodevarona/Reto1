@@ -6,19 +6,20 @@ import androidx.fragment.app.Fragment
 import com.example.reto1.R
 import com.example.reto1.databinding.ActivityMainBinding
 import com.example.reto1.model.Evento
-import com.example.reto1.model.Perfil
 import com.example.reto1.model.Restaurante
 
 class MainActivity : AppCompatActivity() {
 
 
-
+    //PERFIL
     private lateinit var perfil: Perfil
     private lateinit var listaEventos: ListaEventos
 
     private lateinit var vistaPerfil: VistaPerfil
 
+    //PUBLICACIONES
     private lateinit var publicacionesVacias: PublicacionesVacias
+    private lateinit var publicacionNueva: PublicacionNueva
 
     private lateinit var binding : ActivityMainBinding
 
@@ -35,12 +36,16 @@ class MainActivity : AppCompatActivity() {
 
         requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
 
+        //PERFILES
         perfil = Perfil.newInstance()
         listaEventos = ListaEventos.newInstance()
 
         vistaPerfil = VistaPerfil.newInstance()
 
+
+        //PUBLICACIONES
         publicacionesVacias = PublicacionesVacias.newInstance()
+        publicacionNueva = PublicacionNueva.newInstance()
 
         //Suscripcion
         perfil.listener = listaEventos
@@ -75,8 +80,8 @@ class MainActivity : AppCompatActivity() {
     fun showFragment(fragment : Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
-        transaction.addToBackStack(null)
         transaction.commit()
+
 
     }
 

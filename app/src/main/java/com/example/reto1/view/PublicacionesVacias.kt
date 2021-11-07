@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.reto1.R
 import com.example.reto1.databinding.FragmentPublicacionesVaciasBinding
-import com.example.reto1.databinding.FragmentVistaPerfilBinding
-import com.example.reto1.model.Perfil
+import com.example.reto1.util.GeneralBehavior
 
 
-class PublicacionesVacias : Fragment() {
+class PublicacionesVacias :  GeneralBehavior() {
 
     private  var _binding: FragmentPublicacionesVaciasBinding? = null
     private val binding get() = _binding!!
@@ -28,7 +27,14 @@ class PublicacionesVacias : Fragment() {
 
     fun setListaEventos(mostrarEventos: ListaEventos){
         listaEventos = mostrarEventos
+
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +44,10 @@ class PublicacionesVacias : Fragment() {
         _binding = FragmentPublicacionesVaciasBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.crearPublicacionBtn.setOnClickListener {
+        
 
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainer, listaEventos)
-            transaction.addToBackStack("publicacionesVacias")
-            transaction.commit()
+        binding.crearPublicacionBtn.setOnClickListener {
+            super.changeFromFragmentAtoFragmentBWithBackstack(PublicacionNueva.newInstance(), "publicacionesVacias")
 
         }
 
