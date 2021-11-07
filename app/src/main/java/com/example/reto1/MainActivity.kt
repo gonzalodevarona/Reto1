@@ -17,6 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
+    //STATE
+    private val restaurantes = ArrayList<Restaurante>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         //Suscripcion
         perfil.listener = listaEventos
-
+        perfil.listenerPerfil = vistaPerfil
 
 
         showFragment(vistaPerfil)
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigator.setOnItemSelectedListener { menuItem ->
             if (menuItem.itemId == R.id.perfil){
                 showFragment(vistaPerfil)
+                vistaPerfil.setPerfil(perfil)
             } else if (menuItem.itemId == R.id.publicaciones){
                 showFragment(listaEventos)
             } else if (menuItem.itemId == R.id.mapa){
@@ -57,7 +61,22 @@ class MainActivity : AppCompatActivity() {
     fun showFragment(fragment : Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
 
     }
-}
+
+    fun addRestaurante(newRestaurante: Restaurante){
+        restaurantes.add(newRestaurante)
+    }
+
+    fun getSizeRestaurantes():Int{
+        return restaurantes.size
+    }
+
+    fun getRestaurantesIndex(pos : Int):Restaurante{
+        return restaurantes[pos]
+    }
+
+
+} //end of class

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import com.example.reto1.databinding.FragmentPerfilBinding
 import com.example.reto1.databinding.FragmentVistaPerfilBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -16,17 +18,23 @@ import com.example.reto1.databinding.FragmentVistaPerfilBinding
  * Use the [VistaPerfil.newInstance] factory method to
  * create an instance of this fragment.
  */
-class VistaPerfil : Fragment() {
+class VistaPerfil : Fragment(), Perfil.OnNewPerfilListener {
 
     private  var _binding: FragmentVistaPerfilBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var perfil: Perfil
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         perfil = Perfil.newInstance()
+    }
+
+    fun setPerfil(perfilAnterior : Perfil){
+        perfil = perfilAnterior
     }
 
     override fun onCreateView(
@@ -39,7 +47,20 @@ class VistaPerfil : Fragment() {
         _binding = FragmentVistaPerfilBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        //RECUPERAR EL ESTADO
+        val activity: MainActivity = context as MainActivity
+        Log.e(">>>>",activity.getSizeRestaurantes().toString())
+
+        if (activity.getSizeRestaurantes() > 0) {
+            Log.e(">>>>","LLEGUEEEEEEEEE")
+            var restaurante = activity.getRestaurantesIndex(0)
+            binding.nombreRestaurante.text = restaurante.nombre
+            binding.descripcionRestaurante.text = restaurante.descripcion
+        }
+
+
         binding.editarBtn.setOnClickListener {
+            Log.e(">>>", requireActivity().toString())
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, perfil)
             transaction.addToBackStack("vistaPerfil")
@@ -50,6 +71,8 @@ class VistaPerfil : Fragment() {
 
         return view
     }
+
+
 
     override fun onDestroyView() {
         Log.e(">>>","onDestroyView")
@@ -69,6 +92,14 @@ class VistaPerfil : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = VistaPerfil()
+
+    }
+
+    //Metodo que se ejecuta desde Perfil
+    override fun onNewPerfil(perfil: Restaurante) {
+        //Modificar el estado
+
+
 
     }
 

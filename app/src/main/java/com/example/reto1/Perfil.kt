@@ -1,5 +1,6 @@
 package com.example.reto1
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.Instrumentation
 import android.content.Intent
@@ -16,11 +17,6 @@ import com.example.reto1.databinding.FragmentPerfilBinding
 import androidx.activity.result.ActivityResult as ActivityResult
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Perfil.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Perfil : Fragment() {
 
     private  var _binding: FragmentPerfilBinding? = null
@@ -29,12 +25,14 @@ class Perfil : Fragment() {
     //Listener
     var listener : OnNewEventoListener? = null
 
+    var listenerPerfil : OnNewPerfilListener? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.e(">>>","onCreateView")
+
         // Inflate the layout for this fragment
 
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
@@ -51,6 +49,32 @@ class Perfil : Fragment() {
             listener?.let {
                 it.onNewEvento(text)
             }
+
+
+
+            //Publicacion perfil
+            var ableToCreateProfile = true
+
+            if (binding.nameRestaurant.text.toString().compareTo("") == 0){
+                Toast.makeText(activity, "Error: No has escrito el nombre del restaurante", Toast.LENGTH_LONG).show()
+                ableToCreateProfile = false
+            }
+            if (binding.descriptionRestaurant.text.toString().compareTo("") == 0){
+                Toast.makeText(activity, "Error: No has escrito la descripción del restaurante", Toast.LENGTH_LONG).show()
+                ableToCreateProfile = false
+            }
+
+            Log.e(">>>", requireActivity().toString())
+
+            if (ableToCreateProfile){
+                val activity: MainActivity = context as MainActivity
+                val restaurante =  Restaurante(binding.nameRestaurant.text.toString(), binding.nameRestaurant.text.toString(), binding.nameRestaurant.text.toString())
+                activity.addRestaurante(restaurante)
+
+
+
+            }
+
         }
 
         binding.galleryBtn.setOnClickListener{
@@ -82,17 +106,13 @@ class Perfil : Fragment() {
         fun onNewEvento(evento : String){}
     }
 
+    interface OnNewPerfilListener{
+        fun onNewPerfil(perfil : Restaurante){}
+    }
+
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Perfil.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance() = Perfil()
 
