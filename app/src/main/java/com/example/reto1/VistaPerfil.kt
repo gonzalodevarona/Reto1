@@ -53,7 +53,8 @@ class VistaPerfil : Fragment(), Perfil.OnNewPerfilListener {
 
         if (activity.getSizeRestaurantes() > 0) {
             Log.e(">>>>","LLEGUEEEEEEEEE")
-            var restaurante = activity.getRestaurantesIndex(0)
+            var restaurante = activity.getRestauranteByIndex(activity.getSizeRestaurantes()-1)
+
             binding.nombreRestaurante.text = restaurante.nombre
             binding.descripcionRestaurante.text = restaurante.descripcion
         }

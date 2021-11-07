@@ -68,7 +68,7 @@ class Perfil : Fragment() {
 
             if (ableToCreateProfile){
                 val activity: MainActivity = context as MainActivity
-                val restaurante =  Restaurante(binding.nameRestaurant.text.toString(), binding.nameRestaurant.text.toString(), binding.nameRestaurant.text.toString())
+                val restaurante =  Restaurante(binding.nameRestaurant.text.toString(), binding.descriptionRestaurant.text.toString(), binding.descriptionRestaurant.text.toString())
                 activity.addRestaurante(restaurante)
 
 

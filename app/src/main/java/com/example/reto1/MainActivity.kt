@@ -2,6 +2,7 @@ package com.example.reto1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.reto1.databinding.ActivityMainBinding
 import java.util.jar.Manifest
@@ -67,16 +68,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addRestaurante(newRestaurante: Restaurante){
-        restaurantes.add(newRestaurante)
+        val posicionRestaurante = findRestaurantByName(newRestaurante.nombre)
+
+        if (posicionRestaurante == null){
+            restaurantes.add(newRestaurante)
+        } else{
+            val auxRestaurante = restaurantes[posicionRestaurante-1]
+            restaurantes.add(auxRestaurante)
+            restaurantes.removeAt(posicionRestaurante-1)
+        }
+
     }
 
     fun getSizeRestaurantes():Int{
         return restaurantes.size
     }
 
-    fun getRestaurantesIndex(pos : Int):Restaurante{
+    fun getRestauranteByIndex(pos : Int):Restaurante{
         return restaurantes[pos]
     }
+
+
+    fun findRestaurantByName(name: String): Int? {
+        var counter = 0
+        for (restaurante in restaurantes) {
+            counter++
+            if (restaurante.nombre.compareTo(name,true) == 0) {
+                return counter
+            }
+        }
+        return null
+    }
+
 
 
 } //end of class
