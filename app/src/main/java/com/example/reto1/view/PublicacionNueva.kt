@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -56,6 +57,20 @@ class PublicacionNueva :  GeneralBehavior() {
                 ableToCreateEvent = true
             }
 
+            if (binding.horaInicioBtn.text.toString() == "Inicio"){
+                Toast.makeText(activity, "Error: No has seleccionado la fecha de inicio del evento", Toast.LENGTH_LONG).show()
+                ableToCreateEvent = false
+            }else{
+                ableToCreateEvent = true
+            }
+
+            if (binding.horaFinBtn.text.toString() == "Fin"){
+                Toast.makeText(activity, "Error: No has seleccionado la fecha de fin del evento", Toast.LENGTH_LONG).show()
+                ableToCreateEvent = false
+            }else{
+                ableToCreateEvent = true
+            }
+
             if (ableToCreateEvent){
                 val activity: MainActivity = context as MainActivity
                 val publicacion =  Evento(binding.nombreEvento.text.toString(), binding.nombreEvento.text.toString())
@@ -70,39 +85,46 @@ class PublicacionNueva :  GeneralBehavior() {
 
         //ACCION BOTON INICIO
         binding.horaInicioBtn.setOnClickListener {
+            actionDate(binding.horaInicioBtn)
+        }
 
-            var formate = SimpleDateFormat("dd/MMM/YYYY",Locale.US)
-            var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
-
-            val now = Calendar.getInstance()
-            val datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(Calendar.YEAR,year)
-                selectedDate.set(Calendar.MONTH,month)
-                selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-                var date = formate.format(selectedDate.time)
-
-
-                //HORA
-                val timePicker = TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-                    val selectedTime = Calendar.getInstance()
-                    selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
-                    selectedTime.set(Calendar.MINUTE,minute)
-                    date = date+" "+timeFormat.format(selectedTime.time)
-
-                    binding.horaInicioBtn.text = date
-                },
-                    now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),false)
-                timePicker.show()
-
-            },
-                    now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
-            datePicker.show()
-
-
+        //ACCION BOTON FIN
+        binding.horaFinBtn.setOnClickListener {
+            actionDate(binding.horaFinBtn)
         }
 
         return view
+    }
+
+    private fun actionDate(btnText : Button){
+        var formate = SimpleDateFormat("dd/MMM/YYYY",Locale.US)
+        var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
+
+        val now = Calendar.getInstance()
+        val datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(Calendar.YEAR,year)
+            selectedDate.set(Calendar.MONTH,month)
+            selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            var date = formate.format(selectedDate.time)
+
+
+            //HORA
+            val timePicker = TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                val selectedTime = Calendar.getInstance()
+                selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
+                selectedTime.set(Calendar.MINUTE,minute)
+                date = date+" "+timeFormat.format(selectedTime.time)
+
+
+                btnText.text = date
+            },
+                now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),false)
+            timePicker.show()
+
+        },
+            now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
+        datePicker.show()
     }
 
     override fun onDestroyView() {
