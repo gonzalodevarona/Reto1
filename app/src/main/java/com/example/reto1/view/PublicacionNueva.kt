@@ -1,15 +1,26 @@
 package com.example.reto1.view
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.reto1.R
 import com.example.reto1.databinding.FragmentPublicacionNuevaBinding
 import com.example.reto1.databinding.FragmentPublicacionesVaciasBinding
+import com.example.reto1.model.Evento
+import com.example.reto1.model.Restaurante
 import com.example.reto1.util.GeneralBehavior
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class PublicacionNueva :  GeneralBehavior() {
@@ -20,11 +31,14 @@ class PublicacionNueva :  GeneralBehavior() {
     //Siguiente fragment
     private lateinit var listaEventos: ListaEventos
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +47,7 @@ class PublicacionNueva :  GeneralBehavior() {
         val view = binding.root
 
         var ableToCreateEvent = true
+        //ACCION BOTON CREAR
         binding.crearBtn.setOnClickListener {
             if (binding.nombreEvento.text.toString() == ""){
                 Toast.makeText(activity, "Error: No has escrito el nombre del evento", Toast.LENGTH_LONG).show()
@@ -42,10 +57,48 @@ class PublicacionNueva :  GeneralBehavior() {
             }
 
             if (ableToCreateEvent){
+                val activity: MainActivity = context as MainActivity
+                val publicacion =  Evento(binding.nombreEvento.text.toString(), binding.nombreEvento.text.toString())
+                activity.addEvento(publicacion)
+
                 val transaction = requireActivity().supportFragmentManager.popBackStack()
                 super.changeFromFragmentAtoFragmentB(ListaEventos.newInstance())
 
             }
+
+        }
+
+        //ACCION BOTON INICIO
+        binding.horaInicioBtn.setOnClickListener {
+
+            var formate = SimpleDateFormat("dd/MMM/YYYY",Locale.US)
+            var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
+
+            val now = Calendar.getInstance()
+            val datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(Calendar.YEAR,year)
+                selectedDate.set(Calendar.MONTH,month)
+                selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+                var date = formate.format(selectedDate.time)
+
+
+                //HORA
+                val timePicker = TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                    val selectedTime = Calendar.getInstance()
+                    selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
+                    selectedTime.set(Calendar.MINUTE,minute)
+                    date = date+" "+timeFormat.format(selectedTime.time)
+
+                    binding.horaInicioBtn.text = date
+                },
+                    now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),false)
+                timePicker.show()
+
+            },
+                    now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
+            datePicker.show()
+
 
         }
 

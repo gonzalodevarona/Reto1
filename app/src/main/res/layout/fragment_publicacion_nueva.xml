@@ -67,7 +67,7 @@
     <Button
         android:id="@+id/horaInicioBtn"
         android:layout_width="120dp"
-        android:layout_height="57dp"
+        android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:text="Inicio"
         app:layout_constraintEnd_toStartOf="@+id/horaFinBtn"
@@ -78,7 +78,7 @@
     <Button
         android:id="@+id/horaFinBtn"
         android:layout_width="120dp"
-        android:layout_height="57dp"
+        android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:text="Fin"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
         android:layout_width="298dp"
         android:layout_height="60dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="40dp"
         android:text="Crear nuevo evento"
         app:layout_constraintEnd_toEndOf="parent"

@@ -85,6 +85,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //MANEJO ESTADO DE EVENTOS
+    fun addEvento(newEvento: Evento){
+        eventos.add(newEvento)
+    }
+
+    //MANEJO ESTADO DE RESTAURANTES
     fun addRestaurante(newRestaurante: Restaurante){
         val posicionRestaurante = findRestaurantByName(newRestaurante.nombre)
 

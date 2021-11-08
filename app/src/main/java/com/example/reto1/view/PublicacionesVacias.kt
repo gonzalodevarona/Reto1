@@ -44,7 +44,7 @@ class PublicacionesVacias :  GeneralBehavior() {
         _binding = FragmentPublicacionesVaciasBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        
+
 
         binding.crearPublicacionBtn.setOnClickListener {
             super.changeFromFragmentAtoFragmentBWithBackstack(PublicacionNueva.newInstance(), "publicacionesVacias")

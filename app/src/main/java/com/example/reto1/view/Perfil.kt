@@ -78,10 +78,10 @@ class Perfil :  GeneralBehavior() {
             }
 
 
-            Log.e(">>>", "afuera estoy ")
+
 
             if (ableToCreateProfile){
-                Log.e(">>>", "aqui estoy marica")
+
                 val activity: MainActivity = context as MainActivity
                 val restaurante =  Restaurante(binding.nameRestaurant.text.toString(), binding.descriptionRestaurant.text.toString(), binding.descriptionRestaurant.text.toString())
                 activity.addRestaurante(restaurante)
