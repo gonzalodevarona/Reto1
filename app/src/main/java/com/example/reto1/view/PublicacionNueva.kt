@@ -18,6 +18,7 @@ import com.example.reto1.databinding.FragmentPublicacionNuevaBinding
 import com.example.reto1.databinding.FragmentPublicacionesVaciasBinding
 import com.example.reto1.model.Evento
 import com.example.reto1.model.Restaurante
+import com.example.reto1.util.EventoAdapter
 import com.example.reto1.util.GeneralBehavior
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
@@ -29,14 +30,18 @@ class PublicacionNueva :  GeneralBehavior() {
     private  var _binding: FragmentPublicacionNuevaBinding? = null
     private val binding get() = _binding!!
 
-    //Siguiente fragment
-    private lateinit var listaEventos: ListaEventos
+    //Proximo Fragment
+    private var listaEventos : ListaEventos? = null
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+
+    fun setListaEventos(newlistaEventos:ListaEventos){
+        listaEventos = newlistaEventos
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -48,35 +53,45 @@ class PublicacionNueva :  GeneralBehavior() {
         val view = binding.root
 
         var ableToCreateEvent = true
+
         //ACCION BOTON CREAR
         binding.crearBtn.setOnClickListener {
-            if (binding.nombreEvento.text.toString() == ""){
-                Toast.makeText(activity, "Error: No has escrito el nombre del evento", Toast.LENGTH_LONG).show()
+            if (binding.nombreEvento.text.toString() == "" && binding.horaInicioBtn.text.toString() == "Inicio" && binding.horaFinBtn.text.toString() == "Fin"){
+                if (binding.nombreEvento.text.toString() == ""){
+                    Toast.makeText(activity, "Error: No has escrito el nombre del evento", Toast.LENGTH_LONG).show()
+                }
+
+                if (binding.horaInicioBtn.text.toString() == "Inicio"){
+                    Toast.makeText(activity, "Error: No has seleccionado la fecha de inicio del evento", Toast.LENGTH_LONG).show()
+                }
+
+                if (binding.horaFinBtn.text.toString() == "Fin"){
+                    Toast.makeText(activity, "Error: No has seleccionado la fecha de fin del evento", Toast.LENGTH_LONG).show()
+                }
+
                 ableToCreateEvent = false
             }else{
                 ableToCreateEvent = true
             }
 
-            if (binding.horaInicioBtn.text.toString() == "Inicio"){
-                Toast.makeText(activity, "Error: No has seleccionado la fecha de inicio del evento", Toast.LENGTH_LONG).show()
-                ableToCreateEvent = false
-            }else{
-                ableToCreateEvent = true
-            }
 
-            if (binding.horaFinBtn.text.toString() == "Fin"){
-                Toast.makeText(activity, "Error: No has seleccionado la fecha de fin del evento", Toast.LENGTH_LONG).show()
-                ableToCreateEvent = false
-            }else{
-                ableToCreateEvent = true
-            }
+
+
 
             if (ableToCreateEvent){
+
+
+
                 val activity: MainActivity = context as MainActivity
-                val publicacion =  Evento(binding.nombreEvento.text.toString(), binding.nombreEvento.text.toString())
+                val publicacion =  Evento(binding.nombreEvento.text.toString(), binding.nombreEvento.text.toString(), binding.horaInicioBtn.text.toString(), binding.horaFinBtn.text.toString())
                 activity.addEvento(publicacion)
 
-                val transaction = requireActivity().supportFragmentManager.popBackStack()
+
+
+
+
+
+
                 super.changeFromFragmentAtoFragmentB(ListaEventos.newInstance())
 
             }
@@ -131,6 +146,8 @@ class PublicacionNueva :  GeneralBehavior() {
         super.onDestroyView()
         _binding = null
     }
+
+
 
     companion object {
 

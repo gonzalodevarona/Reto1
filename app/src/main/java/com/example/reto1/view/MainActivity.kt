@@ -2,11 +2,13 @@ package com.example.reto1.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Adapter
 import androidx.fragment.app.Fragment
 import com.example.reto1.R
 import com.example.reto1.databinding.ActivityMainBinding
 import com.example.reto1.model.Evento
 import com.example.reto1.model.Restaurante
+import com.example.reto1.util.EventoAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     //STATE
     private val restaurantes = ArrayList<Restaurante>()
-    private val eventos = ArrayList<Evento>()
+    private val eventosAdapter = EventoAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +48,8 @@ class MainActivity : AppCompatActivity() {
         //PUBLICACIONES
         publicacionesVacias = PublicacionesVacias.newInstance()
         publicacionNueva = PublicacionNueva.newInstance()
-
-        //Suscripcion
-        perfil.listener = listaEventos
-
+        publicacionNueva.setListaEventos(listaEventos)
+        listaEventos.setAdapter(eventosAdapter)
 
 
         showFragment(vistaPerfil)
@@ -57,11 +57,11 @@ class MainActivity : AppCompatActivity() {
         binding.navigator.setOnItemSelectedListener { menuItem ->
             if (menuItem.itemId == R.id.perfil){
                 showFragment(vistaPerfil)
-                vistaPerfil.setPerfil(perfil)
+
             } else if (menuItem.itemId == R.id.publicaciones){
-                if (eventos.size == 0){
+                if (eventosAdapter.getItemCount()  == 0){
                     showFragment(publicacionesVacias)
-                    publicacionesVacias.setListaEventos(listaEventos)
+
                 } else{
                     showFragment(listaEventos)
                 }
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
     //MANEJO ESTADO DE EVENTOS
     fun addEvento(newEvento: Evento){
-        eventos.add(newEvento)
+        eventosAdapter.addEvento(newEvento)
     }
 
     //MANEJO ESTADO DE RESTAURANTES

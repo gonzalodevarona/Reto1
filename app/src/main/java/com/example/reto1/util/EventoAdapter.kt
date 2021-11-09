@@ -20,8 +20,12 @@ class EventoAdapter : RecyclerView.Adapter<EventoViewHolder>() {
 
     override fun onBindViewHolder(holder: EventoViewHolder, position: Int) {
         val eventon = eventos[position]
-        //TODO
-       // holder.eventotextrow.text = eventon.evento
+
+        holder.nombreEvento.text = eventon.nombreEvento
+        holder.nombreRestaurante.text = eventon.nombreRestaurante
+        holder.fechaInicio.text = eventon.fechaInicio
+        holder.fechaFin.text = eventon.fechaFin
+
     }
 
     override fun getItemCount(): Int {

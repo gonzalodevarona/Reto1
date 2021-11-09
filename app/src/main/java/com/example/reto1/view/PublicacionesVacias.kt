@@ -17,18 +17,14 @@ class PublicacionesVacias :  GeneralBehavior() {
     private val binding get() = _binding!!
 
     //Siguiente fragment
-    private lateinit var listaEventos: ListaEventos
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        listaEventos = ListaEventos.newInstance()
-    }
-
-    fun setListaEventos(mostrarEventos: ListaEventos){
-        listaEventos = mostrarEventos
 
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

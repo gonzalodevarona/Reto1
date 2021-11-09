@@ -14,7 +14,7 @@ import com.example.reto1.util.GeneralBehavior
 import java.util.*
 
 
-class ListaEventos :   GeneralBehavior(), Perfil.OnNewEventoListener {
+class ListaEventos :   GeneralBehavior() {
 
 
     private  var _binding:FragmentListaEventosBinding? = null
@@ -26,7 +26,7 @@ class ListaEventos :   GeneralBehavior(), Perfil.OnNewEventoListener {
 
 
     //STATE
-    private val adapter = EventoAdapter()
+    private var adapter = EventoAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,11 +70,9 @@ class ListaEventos :   GeneralBehavior(), Perfil.OnNewEventoListener {
 
     }
 
-    //Metodo que se ejecuta desde Perfil
-    override fun onNewEvento(evento:String) {
-        //Modificar el estado
-        val newEvento = Evento(UUID.randomUUID().toString(), evento)
-        adapter.addEvento(newEvento)
-
+    fun setAdapter(newAdapter:EventoAdapter){
+        adapter = newAdapter
     }
-}
+
+
+} //end of class

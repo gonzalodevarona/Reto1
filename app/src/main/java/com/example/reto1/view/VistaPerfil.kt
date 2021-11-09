@@ -23,18 +23,13 @@ class VistaPerfil : GeneralBehavior(){
     private val binding get() = _binding!!
 
     //Siguiente fragment
-    private lateinit var perfil: Perfil
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        perfil = Perfil.newInstance()
-    }
-
-    fun setPerfil(perfilAnterior : Perfil){
-        perfil = perfilAnterior
     }
 
     override fun onCreateView(
@@ -62,7 +57,7 @@ class VistaPerfil : GeneralBehavior(){
 
 
         binding.editarBtn.setOnClickListener {
-            super.changeFromFragmentAtoFragmentB(perfil)
+            super.changeFromFragmentAtoFragmentBWithBackstack(Perfil.newInstance(), "vistaPerfil")
         }
 
         return view

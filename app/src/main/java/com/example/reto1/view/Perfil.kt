@@ -22,8 +22,6 @@ class Perfil :  GeneralBehavior() {
     private  var _binding: FragmentPerfilBinding? = null
     private val binding get() = _binding!!
 
-    //Listener
-    var listener : OnNewEventoListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,10 +52,7 @@ class Perfil :  GeneralBehavior() {
         binding.addRestaurantBtn.setOnClickListener {
             val text = binding.nameRestaurant.text.toString()
 
-            //Publicacion
-            listener?.let {
-                it.onNewEvento(text)
-            }
+
 
 
 
@@ -120,10 +115,6 @@ class Perfil :  GeneralBehavior() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    interface OnNewEventoListener{
-        fun onNewEvento(evento : String){}
     }
 
 
