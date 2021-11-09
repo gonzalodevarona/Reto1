@@ -40,9 +40,6 @@ class PublicacionNueva :  GeneralBehavior() {
 
     }
 
-    fun setListaEventos(newlistaEventos:ListaEventos){
-        listaEventos = newlistaEventos
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -75,20 +72,14 @@ class PublicacionNueva :  GeneralBehavior() {
             }
 
 
-
-
-
             if (ableToCreateEvent){
 
 
-
                 val activity: MainActivity = context as MainActivity
-                val publicacion =  Evento(binding.nombreEvento.text.toString(), binding.nombreEvento.text.toString(), binding.horaInicioBtn.text.toString(), binding.horaFinBtn.text.toString())
+                val restauranteAsociado = activity.getRestauranteActual()
+
+                val publicacion =  Evento(restauranteAsociado!!.nombre, binding.nombreEvento.text.toString(), binding.horaInicioBtn.text.toString(), binding.horaFinBtn.text.toString())
                 activity.addEvento(publicacion)
-
-
-
-
 
 
 

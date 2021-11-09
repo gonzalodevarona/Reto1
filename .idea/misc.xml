@@ -5,7 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/eventorow.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_lista_eventos.xml" value="0.17028985507246377" />
+        <entry key="app/src/main/res/layout/fragment_lista_eventos.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_perfil.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_publicacion_nueva.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_publicaciones_vacias.xml" value="0.25" />

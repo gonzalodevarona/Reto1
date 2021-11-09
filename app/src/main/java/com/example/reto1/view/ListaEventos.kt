@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reto1.util.EventoAdapter
 import com.example.reto1.databinding.FragmentListaEventosBinding
 import com.example.reto1.model.Evento
+import com.example.reto1.model.Restaurante
 import com.example.reto1.util.GeneralBehavior
 import java.util.*
 
@@ -40,11 +41,11 @@ class ListaEventos :   GeneralBehavior() {
 
 
         //Recrear el estado
-        val fm = requireActivity().supportFragmentManager
-        var i = fm.backStackEntryCount
-        while (i<0){
-            fm.popBackStack()
-        }
+
+
+        val activity: MainActivity = context as MainActivity
+        adapter = activity.getEventAdapter()
+
 
 
         val eventoRecycler = binding.eventoRecycler
@@ -52,6 +53,9 @@ class ListaEventos :   GeneralBehavior() {
         eventoRecycler.layoutManager = LinearLayoutManager(activity)
         eventoRecycler.adapter = adapter
 
+        binding.addNuevoEvento.setOnClickListener {
+            super.changeFromFragmentAtoFragmentB(PublicacionNueva.newInstance())
+        }
 
         return view
     }
@@ -70,9 +74,6 @@ class ListaEventos :   GeneralBehavior() {
 
     }
 
-    fun setAdapter(newAdapter:EventoAdapter){
-        adapter = newAdapter
-    }
 
 
 } //end of class

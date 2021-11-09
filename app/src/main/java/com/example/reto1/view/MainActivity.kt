@@ -48,8 +48,7 @@ class MainActivity : AppCompatActivity() {
         //PUBLICACIONES
         publicacionesVacias = PublicacionesVacias.newInstance()
         publicacionNueva = PublicacionNueva.newInstance()
-        publicacionNueva.setListaEventos(listaEventos)
-        listaEventos.setAdapter(eventosAdapter)
+
 
 
         showFragment(vistaPerfil)
@@ -90,7 +89,18 @@ class MainActivity : AppCompatActivity() {
         eventosAdapter.addEvento(newEvento)
     }
 
+    fun getEventAdapter(): EventoAdapter {
+        return eventosAdapter
+    }
+
     //MANEJO ESTADO DE RESTAURANTES
+
+    fun getRestauranteActual():Restaurante?{
+        if (getSizeRestaurantes() >0){
+            return restaurantes[getSizeRestaurantes()-1]
+        }
+        return null
+    }
     fun addRestaurante(newRestaurante: Restaurante){
         val posicionRestaurante = findRestaurantByName(newRestaurante.nombre)
 

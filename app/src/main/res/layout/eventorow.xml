@@ -12,10 +12,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
         app:cardBackgroundColor="#FAF9F9"
         app:cardCornerRadius="15dp"
         app:contentPaddingLeft="10dp"
         app:contentPaddingTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
