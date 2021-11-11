@@ -8,7 +8,7 @@ import com.example.reto1.model.Evento
 
 class EventoAdapter : RecyclerView.Adapter<EventoViewHolder>() {
 
-    private val eventos = ArrayList<Evento>()
+    private var eventos = ArrayList<Evento>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventoViewHolder {
         //Inflate: XML -> View
@@ -36,4 +36,13 @@ class EventoAdapter : RecyclerView.Adapter<EventoViewHolder>() {
         eventos.add(evento)
 
     }
-}
+
+    fun getEventos(): ArrayList<Evento> {
+        return eventos
+    }
+
+    fun setEventos(newEventos : ArrayList<Evento>) {
+        eventos = newEventos
+    }
+
+} //end of class
