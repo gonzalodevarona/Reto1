@@ -99,6 +99,11 @@ class PublicacionNueva :  GeneralBehavior() {
             actionDate(binding.horaFinBtn)
         }
 
+        //ACCION BOTON UBICACION
+        binding.ubicacionEventoBtn.setOnClickListener {
+            super.changeFromFragmentAtoFragmentB(EscogerMapa.newInstance())
+        }
+
         return view
     }
 

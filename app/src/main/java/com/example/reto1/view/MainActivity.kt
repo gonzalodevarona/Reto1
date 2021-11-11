@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                 showFragment(vistaPerfil)
 
             } else if (menuItem.itemId == R.id.publicaciones){
+
                 if (eventosAdapter.getItemCount()  == 0){
                     showFragment(publicacionesVacias)
 
@@ -98,57 +99,107 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
 
 
+
     }
 
     //PERSISTENCIA
 
-//    override fun onPause() {
-//        super.onPause()
-//        val request = Request(restaurantes, eventosAdapter)
-//
-//        //Serializar
-//        val json = Gson().toJson(request)
-//        Log.e(">>>",json)
-//
-//        //Shared Preferences
-//        val sharedPref = getPreferences(Context.MODE_PRIVATE)
-//        sharedPref.edit().putString("currentState", json).apply()
-//
-//
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//
-//        val sharedPref = getPreferences(Context.MODE_PRIVATE)
-//        val json = sharedPref.getString("currentState", "NO_DATA")
-//
-//        if (json != "NO_DATA"){
-//            //Deserializar
-//            val currentState = Gson().fromJson(json, Request::class.java)
-//
-//            //TODO
-////            restaurantes = currentState.restaurantes
-////            eventosAdapter = currentState.eventos
-//
-//        }
-//
-//
-//    }
+    override fun onPause() {
+        super.onPause()
+        val request = Request(arrayListRestaurantesToString(restaurantes), arrayListEventosToString(eventosAdapter.getEventos()))
+
+        //Serializar
+        val json = Gson().toJson(request)
+        Log.e(">>>",json)
+
+        //Shared Preferences
+        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        sharedPref.edit().putString("currentState", json).apply()
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        val json = sharedPref.getString("currentState", "NO_DATA")
+
+        if (json != "NO_DATA"){
+            //Deserializar
+            val currentState = Gson().fromJson(json, Request::class.java)
+            var stringRestaurantes = currentState.restaurantes
+            var stringEventos = currentState.eventos
+
+            //TODO
+            restaurantes = stringRestaurantesToArraylist(currentState.restaurantes)
+//            eventosAdapter = currentState.eventos
+
+        }
+
+
+    }
 
     //Aqui debí usar generics pero el time no me dio
 
     fun arrayListRestaurantesToString(array:ArrayList<Restaurante>):String{
-        var arrayString:String = ""
+        var arrayString:String = "["
 
         for (restaurant in array){
-
+            var element:String = ""
+            element = "{\"nombre\":\"${restaurant.nombre}\",\"descripcion\":\"${restaurant.descripcion}\",\"pathImagen\":\"${restaurant.pathImagen}\"},"
+            arrayString = arrayString+element
         }
+        if(array.count()>0){
+            arrayString = arrayString.subSequence(0, arrayString.length-1).toString()
+        }
+        arrayString = arrayString+"]"
 
         return arrayString
     }
 
-    fun arrayListEventosToString(array:ArrayList<Evento>){
+    fun arrayListEventosToString(array:ArrayList<Evento>):String{
+        var arrayString:String = "["
+
+        for (evento in array){
+            var element:String = ""
+            element = "{\"nombreRestaurante\":\"${evento.nombreRestaurante}\",\"nombreEvento\":\"${evento.nombreEvento}\",\"fechaInicio\":\"${evento.fechaInicio}\",\"fechaFin\":\"${evento.fechaFin}\"},"
+            arrayString = arrayString+element
+        }
+        if(array.count()>0){
+            arrayString = arrayString.subSequence(0, arrayString.length-1).toString()
+        }
+        arrayString = arrayString+"]"
+
+        return arrayString
+    }
+
+    fun stringRestaurantesToArraylist(array:String):ArrayList<Restaurante>{
+        var arrayString = array
+        var arrayObject = ArrayList<Restaurante>()
+
+        if (array != "[]"){
+            arrayString = arrayString.replace("[","")
+            arrayString = arrayString.replace("]","")
+            arrayString = arrayString.replace("{","")
+
+            val cleanArray = arrayString.split("}").toTypedArray()
+            var i = 0
+            while (i < cleanArray.size-1){
+
+
+                if(cleanArray[i][0] == ','){
+                    cleanArray[i]= cleanArray[i].subSequence(1, arrayString.length).toString()
+                }
+                val newRestaurant = Gson().fromJson(cleanArray[i], Restaurante::class.java)
+
+                arrayObject.add(newRestaurant)
+
+                i++
+            }
+
+        }
+        return arrayObject
 
     }
 
