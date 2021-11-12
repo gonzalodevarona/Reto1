@@ -131,9 +131,9 @@ class MainActivity : AppCompatActivity() {
             var stringRestaurantes = currentState.restaurantes
             var stringEventos = currentState.eventos
 
-            //TODO
+
             restaurantes = stringRestaurantesToArraylist(currentState.restaurantes)
-//            eventosAdapter = currentState.eventos
+            eventosAdapter.setEventos(stringEventosToArraylist(currentState.eventos))
 
         }
 
@@ -187,13 +187,80 @@ class MainActivity : AppCompatActivity() {
             var i = 0
             while (i < cleanArray.size-1){
 
+                var textInMatter : String = cleanArray[i]
 
-                if(cleanArray[i][0] == ','){
-                    cleanArray[i]= cleanArray[i].subSequence(1, arrayString.length).toString()
+
+                if(textInMatter[0] == ','){
+
+                    textInMatter= textInMatter.subSequence(1, textInMatter.length).toString()
                 }
-                val newRestaurant = Gson().fromJson(cleanArray[i], Restaurante::class.java)
+                textInMatter= textInMatter.replace("\"nombre\":","")
+                textInMatter= textInMatter.replace("\"descripcion\":","")
+                textInMatter= textInMatter.replace("\"pathImagen\":","")
+                textInMatter= textInMatter.replace("\"","")
+
+                var finalArray = textInMatter.split(",").toTypedArray()
+
+                var newRestaurant = Restaurante("","","")
+
+
+                newRestaurant.nombre = finalArray[0]
+                newRestaurant.descripcion = finalArray[1]
+                newRestaurant.pathImagen = finalArray[2]
+
+
+
 
                 arrayObject.add(newRestaurant)
+
+                i++
+            }
+
+        }
+        return arrayObject
+
+    }
+
+    fun stringEventosToArraylist(array:String):ArrayList<Evento>{
+        var arrayString = array
+        var arrayObject = ArrayList<Evento>()
+
+        if (array != "[]"){
+            arrayString = arrayString.replace("[","")
+            arrayString = arrayString.replace("]","")
+            arrayString = arrayString.replace("{","")
+
+            val cleanArray = arrayString.split("}").toTypedArray()
+            var i = 0
+            while (i < cleanArray.size-1){
+
+                var textInMatter : String = cleanArray[i]
+
+
+                if(textInMatter[0] == ','){
+
+                    textInMatter= textInMatter.subSequence(1, textInMatter.length).toString()
+                }
+                textInMatter= textInMatter.replace("\"nombreRestaurante\":","")
+                textInMatter= textInMatter.replace("\"nombreEvento\":","")
+                textInMatter= textInMatter.replace("\"fechaInicio\":","")
+                textInMatter= textInMatter.replace("\"fechaFin\":","")
+                textInMatter= textInMatter.replace("\"","")
+
+                var finalArray = textInMatter.split(",").toTypedArray()
+
+                var newEvento = Evento("","","","")
+
+
+                newEvento.nombreRestaurante = finalArray[0]
+                newEvento.nombreEvento = finalArray[1]
+                newEvento.fechaInicio = finalArray[2]
+                newEvento.fechaFin = finalArray[3]
+
+
+
+
+                arrayObject.add(newEvento)
 
                 i++
             }
