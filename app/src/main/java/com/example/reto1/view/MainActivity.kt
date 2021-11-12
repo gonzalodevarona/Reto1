@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
 
         showFragment(vistaPerfil)
-
+        setTitle("ICESI Sites")
         binding.navigator.setOnItemSelectedListener { menuItem ->
             if (menuItem.itemId == R.id.perfil){
                 showFragment(vistaPerfil)
@@ -91,6 +91,10 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+
+        //RECUPERAR ESTADO INICIAL
+        onResume()
+
     }
 
     fun showFragment(fragment : Fragment){

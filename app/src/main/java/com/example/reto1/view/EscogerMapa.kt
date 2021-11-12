@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.reto1.R
+import com.example.reto1.databinding.FragmentEscogerMapaBinding
 import com.example.reto1.databinding.FragmentMapaEventosBinding
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -19,7 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class EscogerMapa : Fragment() {
 
-    private  var _binding: FragmentMapaEventosBinding? = null
+    private  var _binding: FragmentEscogerMapaBinding? = null
     private val binding get() = _binding!!
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -35,7 +36,7 @@ class EscogerMapa : Fragment() {
         Log.e(">>>","onCreateView")
         // Inflate the layout for this fragment
 
-        _binding = FragmentMapaEventosBinding.inflate(inflater, container, false)
+        _binding = FragmentEscogerMapaBinding.inflate(inflater, container, false)
         val view = binding.root
 
         return view
