@@ -6,7 +6,7 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17604166666666668" />
         <entry key="app/src/main/res/layout/eventorow.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_escoger_mapa.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_escoger_mapa.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_lista_eventos.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_perfil.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_pick_address.xml" value="0.15896739130434784" />

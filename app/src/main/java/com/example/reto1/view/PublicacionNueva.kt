@@ -1,7 +1,10 @@
 package com.example.reto1.view
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.location.Address
+import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -20,12 +23,13 @@ import com.example.reto1.model.Evento
 import com.example.reto1.model.Restaurante
 import com.example.reto1.util.EventoAdapter
 import com.example.reto1.util.GeneralBehavior
+import com.google.android.gms.maps.model.Marker
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class PublicacionNueva :  GeneralBehavior() {
+class PublicacionNueva :  GeneralBehavior(), EscogerMapa.OnNewMarkerListener {
 
     private  var _binding: FragmentPublicacionNuevaBinding? = null
     private val binding get() = _binding!!
@@ -101,7 +105,11 @@ class PublicacionNueva :  GeneralBehavior() {
 
         //ACCION BOTON UBICACION
         binding.ubicacionEventoBtn.setOnClickListener {
-            super.changeFromFragmentAtoFragmentB(EscogerMapa.newInstance())
+            val escogerMapa = EscogerMapa()
+
+            escogerMapa.listener = this
+
+            super.changeFromFragmentAtoFragmentBWithBackstack(escogerMapa, null)
         }
 
         return view
@@ -152,4 +160,20 @@ class PublicacionNueva :  GeneralBehavior() {
         fun newInstance() = PublicacionNueva()
 
     }
-}
+
+    override fun onNewMarker(newMarker: Marker) {
+//        val c = context
+//
+//        val geoCoder = Geocoder(context , Locale.getDefault())
+//
+//        val addresses: List<Address> = geoCoder.getFromLocation(marker.position.latitude, marker.position.longitude, 1)
+//
+//        val result = addresses[0].getAddressLine(0)
+//        Log.e(">>>", result)
+
+   //     binding.ubicacionEventoBtn.text = newMarker.position.latitude.toString()+","+newMarker.position.longitude.toString()
+
+    }
+
+
+} //end of class
